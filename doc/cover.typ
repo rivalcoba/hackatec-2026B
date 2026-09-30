@@ -84,7 +84,8 @@
       align(center + horizon)[
       #grid(
         columns: (1fr,),
-        row-gutter: 14mm,
+        // Espaciado entre el separador geométrico y el título.
+        row-gutter: 8mm,
         align(center + horizon)[
           #cover-group("MEMORIA TÉCNICA", [
             #text(size: 8.5pt, weight: "medium", fill: muted)[

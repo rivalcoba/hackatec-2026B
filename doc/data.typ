@@ -12,28 +12,28 @@
 
   students: (
     (
-      name: "Nombre del alumno 1",
-      program: "Programa educativo 1",
+      name: "Martinez Sanchez Angel Armando",
+      program: "ITICS",
       email: "alumno1@institucional.mx",
     ),
     (
-      name: "Nombre del alumno 2",
-      program: "Programa educativo 2",
+      name: "Mendoza Rodriguez Heber Otoniel",
+      program: "ITICS",
       email: "alumno2@institucional.mx",
     ),
     (
-      name: "Nombre del alumno 3",
-      program: "Programa educativo 3",
+      name: "Romero Angeles Ivonne Alejandra",
+      program: "ILOG",
       email: "alumno3@institucional.mx",
     ),
     (
-      name: "Nombre del alumno 4",
-      program: "Programa educativo 4",
+      name: "Parra Perez Ruben",
+      program: "ITICS",
       email: "alumno4@institucional.mx",
     ),
     (
-      name: "Nombre del alumno 5",
-      program: "Programa educativo 5",
+      name: "Urbina Cruz Roberto Alexis",
+      program: "ITICS",
       email: "alumno5@institucional.mx",
     ),
   ),
@@ -45,7 +45,7 @@
 
   professor: "Ivan Rivalcoba",
   
-  date: "Septiembre de 2026",
+  date: "30 de Septiembre de 2026",
   city: "CDMX",
   period: "GAM",
 )

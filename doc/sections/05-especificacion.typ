@@ -1,15 +1,18 @@
 = Especificación técnica de la propuesta
 
-Presente la arquitectura, los componentes y las interfaces de la solución.
+== Características ténicas esperadas
+La especificación técnica de PianiTech reúne las capacidades funcionales y operativas que deberá cumplir el prototipo para adquirir, transmitir, organizar y analizar la telemetría de los activos monitoreados. Estas características orientan su implementación, sus pruebas y la evaluación de su funcionamiento:
 
-== Arquitectura
+- Adquisición modular para rotación, gas, fuego y nivel de líquidos.
+- Mensajes con `deviceId`, `assetId`, variable, valor, unidad y marca de tiempo.
+- Jerarquía MQTT que identifique taller, área, activo y tipo de dato.
+- Validación de estructura y tipo; un mensaje inválido no debe detener el servicio.
+- Separación entre telemetría, eventos y estado de dispositivos.
+- Registro de interrupciones de comunicación y conservación del orden temporal.
+- Ventanas configurables con características pertinentes para cada sensor.
+- Puntuación o clasificación de anomalía mediante *Isolation Forest*.
+- Arquitectura extensible sin rediseñar el flujo completo.
+- Operación complementaria: no sustituye sistemas certificados, inspecciones ni controles de seguridad.
 
-Incluya el diagrama y la descripción de los módulos, flujos de información y responsabilidades.
-
-== Requisitos técnicos
-
-Detalle los requisitos funcionales, no funcionales, de seguridad, disponibilidad y operación.
-
-== Implementación
-
-Explique la configuración y el procedimiento necesario para poner en funcionamiento la propuesta.
+== Diagramas de diseño
+TODO 

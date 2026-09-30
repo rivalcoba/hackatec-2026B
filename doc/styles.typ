@@ -23,7 +23,7 @@
   set par(
     justify: true,
     leading: 0.72em,
-    spacing: 0.78em,
+    spacing: 1.3em,
   )
 
   set page(

@@ -2,7 +2,7 @@
 
 = Resumen
 
-*PianiTech* es un kit de retrofitting para instalar sistemas de vigilancia remota en talleres y PYMES con infraestructura brownfield. Integra sensores, comunicación MQTT y un cliente desarrollado en Python para supervisar máquinas rotatorias, presencia de gas o fuego y niveles de líquidos. Además, organiza los datos en ventanas de operación para detectar comportamientos anómalos mediante Isolation Forest.
+*PianiTech* (@logo-pianitech) es un kit de retrofitting para instalar sistemas de vigilancia remota en talleres y PYMES con infraestructura brownfield. Integra sensores, comunicación MQTT y un cliente desarrollado en Python para supervisar máquinas rotatorias, presencia de gas o fuego y niveles de líquidos. Además, organiza los datos en ventanas de operación para detectar comportamientos anómalos mediante Isolation Forest.
 
 #figure(
   image("../assets/Piantech-Logo.png",width: 60mm),

@@ -8,7 +8,7 @@ Presente el tema, delimite el contexto y explique el problema que motiva el trab
 
 == Antecedentes
 
-Sintetice la literatura directamente relacionada con el problema. Compare enfoques, hallazgos y limitaciones; evite convertir esta sección en una lista aislada de resúmenes. Utilice citas bibliográficas mediante claves como @He2017.
+Sintetice la literatura directamente relacionada con el problema. Compare enfoques, hallazgos y limitaciones; evite convertir esta sección en una lista aislada de resúmenes. Utilice citas bibliográficas mediante claves como.
 
 == Objetivo y alcance
 
