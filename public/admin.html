@@ -45,6 +45,7 @@
     .device-head { display:flex; align-items:start; justify-content:space-between; gap:1rem; padding-bottom:.85rem; border-bottom:1px solid var(--line); }
     .device-index { display:block; margin-bottom:.25rem; color:var(--green); font:500 .68rem var(--mono); }
     .device-head h3 { margin:0; font-size:1rem; }
+    .device-emoji { margin-right:.35rem; }
     .device-id { color:var(--muted); font:.65rem var(--mono); overflow-wrap:anywhere; }
     .device-state { display:flex; align-items:center; justify-content:space-between; gap:.8rem; min-height:72px; }
     .state-label { color:var(--muted); font-size:.76rem; }
@@ -88,19 +89,20 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     const API = '/api';
+    const DEVICE_ICONS = { fire: '🔥', water: '🌊', presence: '👷', motor: '⚙️' };
     const OPTIONS = {
-      fire: [['false', 'Sin fuego'], ['true', 'Fuego detectado']],
-      water: [['normal', 'Normal'], ['high', 'Alto']],
-      presence: [['present', 'Presente'], ['absent', 'Ausente']],
-      motor: [['off', 'Apagado'], ['on', 'Encendido']],
+      fire: [['false', '✅ Sin fuego'], ['true', '🔥 Fuego detectado']],
+      water: [['normal', '💧 Normal'], ['high', '🌊 Nivel alto']],
+      presence: [['present', '👷 Presente'], ['absent', '🚫 Ausente']],
+      motor: [['off', '⏹️ Apagado'], ['on', '⚙️ Encendido']],
     };
     const LABELS = {
-      fire: { false: 'Sin fuego', true: 'Fuego detectado' },
-      water: { normal: 'Normal', high: 'Alto' },
-      presence: { present: 'Presente', absent: 'Ausente' },
-      motor: { off: 'Apagado', on: 'Encendido' },
+      fire: { false: '✅ Sin fuego', true: '🔥 Fuego detectado' },
+      water: { normal: '💧 Normal', high: '🌊 Nivel alto' },
+      presence: { present: '👷 Presente', absent: '🚫 Ausente' },
+      motor: { off: '⏹️ Apagado', on: '⚙️ Encendido' },
     };
-    const CAUSES = { fire_detected: 'Fuego detectado', water_high: 'Nivel de agua alto', motor_on_without_operator: 'Motor encendido sin operador' };
+    const CAUSES = { fire_detected: '🔥 Fuego detectado', water_high: '🌊 Nivel de agua alto', motor_on_without_operator: '⚙️ Motor encendido sin operador' };
     const grid = document.getElementById('deviceGrid');
     const cards = new Map();
     const toast = document.getElementById('toast');
@@ -130,7 +132,11 @@
       number.className = 'device-index';
       number.textContent = `DISPOSITIVO 0${index + 1}`;
       const title = document.createElement('h3');
-      title.textContent = device.name;
+      const icon = document.createElement('span');
+      icon.className = 'device-emoji';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = DEVICE_ICONS[device.type] || '📟';
+      title.append(icon, document.createTextNode(device.name));
       titleGroup.append(number, title);
       const id = document.createElement('span');
       id.className = 'device-id';
@@ -162,7 +168,7 @@
       });
       const button = document.createElement('button');
       button.type = 'submit';
-      button.textContent = 'Enviar estado';
+      button.textContent = '📡 Enviar estado';
       form.append(select, button);
       const elements = { stateValue, updated, select, button, device };
       form.addEventListener('submit', (event) => submitUpdate(event, elements));
@@ -184,7 +190,7 @@
       });
       const active = Boolean(state.alarm?.active);
       document.getElementById('alarmBanner').classList.toggle('active', active);
-      document.getElementById('alarmSymbol').textContent = active ? '!' : '✓';
+      document.getElementById('alarmSymbol').textContent = active ? '🚨' : '✅';
       document.getElementById('alarmTitle').textContent = active ? 'Alarma activa' : 'Sistema sin alarmas';
       const causes = (state.alarm?.causes || []).map((cause) => CAUSES[cause] || cause);
       document.getElementById('alarmDetails').textContent = causes.length ? causes.join(' · ') : 'Los dispositivos están en estado normal.';
@@ -202,7 +208,7 @@
         const state = await response.json();
         if (!response.ok) throw new Error(state.error || 'No se pudo enviar el estado');
         renderState(state);
-        showToast(`Estado enviado: ${device.name}`);
+        showToast(`✅ Estado enviado: ${device.name}`);
       } catch (error) {
         showToast(error.message || 'Error de conexión con el servidor', true);
       } finally {

@@ -46,6 +46,7 @@
     .device-card:last-child { border-right:0; }
     .device-index { color:var(--green); font:500 .66rem var(--mono); }
     .device-card h3 { min-height:2.5em; margin:.55rem 0 1rem; font-size:.92rem; line-height:1.25; }
+    .device-emoji { margin-right:.35rem; }
     .reading { display:flex; align-items:center; gap:.55rem; }
     .reading-dot { width:10px; height:10px; flex:none; border-radius:50%; background:var(--green); }
     .reading.alert .reading-dot { background:var(--red); }
@@ -93,11 +94,12 @@
   </main>
   <script>
     const API = '/api';
+    const DEVICE_ICONS = { fire: '🔥', water: '🌊', presence: '👷', motor: '⚙️' };
     const LABELS = {
-      fire: { false: 'Sin fuego', true: 'Fuego detectado' }, water: { normal: 'Normal', high: 'Alto' },
-      presence: { present: 'Presente', absent: 'Ausente' }, motor: { off: 'Apagado', on: 'Encendido' },
+      fire: { false: '✅ Sin fuego', true: '🔥 Fuego detectado' }, water: { normal: '💧 Normal', high: '🌊 Nivel alto' },
+      presence: { present: '👷 Presente', absent: '🚫 Ausente' }, motor: { off: '⏹️ Apagado', on: '⚙️ Encendido' },
     };
-    const CAUSES = { fire_detected: 'Fuego detectado', water_high: 'Nivel de agua alto', motor_on_without_operator: 'Motor encendido sin operador presente' };
+    const CAUSES = { fire_detected: '🔥 Fuego detectado', water_high: '🌊 Nivel de agua alto', motor_on_without_operator: '⚙️ Motor encendido sin operador presente' };
     const grid = document.getElementById('deviceGrid');
     const feed = document.getElementById('feed');
     const cards = new Map();
@@ -119,7 +121,11 @@
       number.className = 'device-index';
       number.textContent = `DISPOSITIVO 0${index + 1}`;
       const title = document.createElement('h3');
-      title.textContent = device.name;
+      const icon = document.createElement('span');
+      icon.className = 'device-emoji';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = DEVICE_ICONS[device.type] || '📟';
+      title.append(icon, document.createTextNode(device.name));
       const reading = document.createElement('div');
       reading.className = 'reading';
       const dot = document.createElement('span');
@@ -140,7 +146,7 @@
     function renderAlarm(alarm = { active: false, causes: [] }) {
       const active = Boolean(alarm.active);
       document.getElementById('alarmPanel').classList.toggle('active', active);
-      document.getElementById('alarmSymbol').textContent = active ? '!' : '✓';
+      document.getElementById('alarmSymbol').textContent = active ? '🚨' : '✅';
       document.getElementById('alarmTitle').textContent = active ? 'Alarma activa' : 'Sistema sin alarmas';
       const causes = (alarm.causes || []).map((cause) => CAUSES[cause] || cause);
       document.getElementById('alarmDetails').textContent = causes.length ? causes.join(' · ') : 'Todos los dispositivos están dentro de las condiciones normales.';
