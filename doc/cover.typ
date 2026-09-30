@@ -1,4 +1,4 @@
-#import "styles.typ": burgundy, gold, muted, navy
+#import "styles.typ": burgundy, gold, line-gray, muted, navy
 
 #let cover-entry(label, primary, secondary: none) = [
   #text(
@@ -7,19 +7,24 @@
     tracking: 1.15pt,
     fill: burgundy,
   )[#upper(label)]
-  #v(1mm)
+  #v(0.5mm)
   #text(
     size: 14pt,
     weight: "semibold",
     fill: navy,
   )[#primary]
   #if secondary != none [
-    #v(0.8mm)
+    #v(0.4mm)
     #text(
       size: 9.5pt,
       fill: muted,
     )[#secondary]
   ]
+]
+
+#let student-entry(student) = [
+  #text(size: 9.2pt, weight: "semibold", fill: navy)[#student.name]
+  #text(size: 8pt, fill: muted)[ · #student.program · #student.email]
 ]
 
 #let cover(data) = page(
@@ -32,7 +37,7 @@
   #pad(left: 18mm, right: 18mm, top: 12mm, bottom: 12mm)[
     #grid(
       columns: (1fr,),
-      rows: (48mm, 8mm, 70mm, 127mm, 20mm),
+      rows: (45mm, 7mm, 56mm, 32mm, 80mm, 42mm, 7mm),
       row-gutter: 0pt,
 
       // Identidad institucional.
@@ -64,7 +69,7 @@
         )
       ],
 
-      // Título y descripción.
+      // Título y subtítulo.
       align(center + horizon)[
         #pad(left: 12mm, right: 12mm)[
           #text(
@@ -82,7 +87,7 @@
             fill: muted,
           )[#data.course · #data.course-code]
 
-          #v(5mm)
+          #v(3mm)
 
           #par(leading: 0.98em, justify: false)[
             #text(
@@ -93,7 +98,7 @@
             )[#data.title]
           ]
 
-          #v(4mm)
+          #v(2.5mm)
 
           #par(leading: 1.15em, justify: false)[
             #text(
@@ -104,36 +109,31 @@
         ]
       ],
 
-      // Datos académicos en una secuencia vertical, sin recuadros.
+      // Reto y temática.
       align(center + horizon)[
-        #grid(
-          columns: (1fr,),
-          rows: (30mm, 30mm, 30mm, 30mm),
-          row-gutter: 1mm,
-          align(center + horizon)[
-            #cover-entry(
-              "PRESENTA",
-              data.student,
-              secondary: [Matrícula: #data.student-id · #data.email],
-            )
-          ],
-          align(center + horizon)[
-            #cover-entry("DOCENTE TITULAR", data.professor)
-          ],
-          align(center + horizon)[
-            #cover-entry(
-              "PROGRAMA",
-              data.program,
-              secondary: [#data.unit · #data.institution],
-            )
-          ],
-          align(center + horizon)[
-            #cover-entry(
-              "FECHA DE ENTREGA",
-              data.date,
-              secondary: [#data.city · #data.period],
-            )
-          ],
+        #cover-entry("RETO", data.reto)
+        #v(2mm)
+        #cover-entry("TEMÁTICA", data.tematica)
+      ],
+
+      // Lista de alumnos.
+      align(center + horizon)[
+        #cover-entry("PRESENTA", [
+          #for student in data.students {
+            student-entry(student)
+            line(length: 100%, stroke: 0.35pt + line-gray)
+          }
+        ])
+      ],
+
+      // Asesor y fecha de entrega.
+      align(center + horizon)[
+        #cover-entry("ASESOR", data.professor)
+        #v(2mm)
+        #cover-entry(
+          "FECHA DE ENTREGA",
+          data.date,
+          secondary: [#data.city · #data.period],
         )
       ],
 
