@@ -11,3 +11,12 @@ A continuación, se presentan las alternativas identificadas mediante cada compo
 - *Poner en otros usos:* reutilizar la arquitectura en manufactura, mantenimiento, depósitos u otros entornos que requieran supervisión remota.
 - *Eliminar:* evitar el acoplamiento directo entre sensores y aplicaciones consumidoras, así como la dependencia exclusiva de revisiones manuales o umbrales únicos.
 - *Reordenar o revertir:* analizar primero ventanas completas y después priorizar la inspección humana, en lugar de reaccionar únicamente a lecturas aisladas.
+
+#figure(
+	image(
+		"../assets/arch-diagram.png",
+		format: "png",
+		width: 100%,
+	),
+	caption: [Los sensores de vibración, gas, fuego y nivel envían lecturas con marca de tiempo a un nodo Arduino, que las transmite por Wi‑Fi o Ethernet. Un cliente en Python valida y normaliza los datos, construye ventanas y aplica Isolation Forest para detectar anomalías. El broker MQTT coordina el intercambio y una base de series temporales conserva la información. Finalmente, una API/WebSocket distribuye actualizaciones al panel web, la aplicación móvil y el visor de realidad virtual, con protección TLS, autenticación y registro de actividad.],
+)<arch-diagram>

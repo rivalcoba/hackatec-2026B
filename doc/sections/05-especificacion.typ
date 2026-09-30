@@ -14,5 +14,29 @@ La especificación técnica de PianiTech reúne las capacidades funcionales y op
 - Arquitectura extensible sin rediseñar el flujo completo.
 - Operación complementaria: no sustituye sistemas certificados, inspecciones ni controles de seguridad.
 
+
 == Diagramas de diseño
-TODO 
+
+El flujo general de interacción entre los usuarios, los dispositivos y el sistema de monitoreo se resume en el caso de uso de la Figura @caso-de-uso.
+
+#figure(
+	image(
+		"../assets/caso-de-uso.png",
+		format: "jpg",
+		width: 65%,
+	),
+	caption: [Caso de uso general de PianiTech.],
+) <caso-de-uso>
+
+== Diagramas de Circuito
+
+El diagrama de circuito (@diagrama-circuito) de PianiTech muestra la interconexión de los sensores, actuadores y el controlador principal, así como la alimentación y la comunicación con el sistema de monitoreo.
+
+#figure(
+	image(
+		"../assets/diagrama-cto.png",
+		format: "png",
+		width: 100%,
+	),
+	caption: [Diagrama de circuito de PianiTech.],
+) <diagrama-circuito>

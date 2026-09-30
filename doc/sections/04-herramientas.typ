@@ -1,10 +1,10 @@
 = Herramientas tecnológicas empleadas
 
-Para el armado y validación del prototipo se seleccionaron componentes accesibles, compatibles y de fácil adquisición:
+Para armar y validar el prototipo se seleccionaron componentes accesibles y compatibles:
 
-- *Control y expansión:* Arduino Uno como unidad principal y Sensor Shield para distribuir de forma ordenada las conexiones de alimentación, señales analógicas y digitales.
-- *Actuadores:* motor paso a paso 28BYJ-48 para pruebas de movimiento controlado; motor DC 130 con hélice plástica para simular ventilación; y módulo ULN2003 como etapa de potencia y protección.
-- *Sensores y control:* sensor de nivel de agua conectado al pin A0; sensor infrarrojo de flama, ajustable mediante potenciómetro, conectado a los pines A1 y 12; y botón pulsador o interruptor para controlar el encendido y apagado del motor.
-- *Alimentación:* módulo MB102 para suministrar energía estable a los actuadores, batería de 9 V con conector para operación independiente y cable USB para programar y alimentar inicialmente el Arduino.
-- *Interconexión:* cables Dupont macho y hembra para enlazar sensores, actuadores y módulos con el Sensor Shield.
-- *Software:* Arduino IDE, bibliotecas de soporte y código embebido para adquisición de datos, evaluación de condiciones y activación de respuestas.
+- *Control:* Arduino Uno y Sensor Shield para gestionar conexiones de alimentación y señales.
+- *Actuadores:* motor paso a paso 28BYJ-48, motor DC 130 con hélice y módulo ULN2003 para potencia y protección.
+- *Sensores:* sensor de nivel de agua, sensor infrarrojo de flama y botón de control para activar o detener el motor.
+- *Alimentación e interconexión:* módulo MB102, batería de 9 V, cable USB y cables Dupont.
+- *Software:* Arduino IDE, bibliotecas de soporte, código embebido y Flask para desarrollar el cliente de monitoreo.
+- *Comunicación MQTT:* se utilizó MQTT (*Message Queuing Telemetry Transport*) con Mosquitto como broker. Es un protocolo ligero de publicación y suscripción que consume poco ancho de banda, organiza la telemetría por dispositivo, activo o variable y desacopla sensores y aplicaciones. Esta combinación es pertinente para PianiTech porque facilita controlar la entrega de mensajes e integrar dispositivos limitados de forma escalable.

@@ -1,99 +1,162 @@
 #import "../styles.typ": muted, navy, pale-blue, paper
 
-= Proyección de costos
+= Estructura de Costos Alternativa
 
-La estimación financiera de PianiTech se plantea como un proceso gradual que acompaña a la tecnología desde la validación del prototipo hasta su comercialización o transferencia. La primera etapa corresponde a un lote piloto de 10 unidades para comprobar adquisición, comunicación MQTT, almacenamiento, construcción de ventanas y detección de anomalías. La segunda etapa consolida el diseño, la lista de materiales, los tiempos de ensamble, la instalación y la documentación. La tercera incorpora los recursos necesarios para producir, proteger, empaquetar, promover, distribuir, capacitar y dar soporte a la solución.
+== Escenario de arranque: primeros seis meses
 
-El presupuesto distingue entre *costos preliminares disponibles*, *actividades sin desembolso inicial* y *rubros pendientes de investigación o cotización*. Esta separación evita presentar como inversión definitiva un subtotal que todavía no incluye todos los recursos requeridos.
+La siguiente estructura representa un presupuesto de planeación para iniciar PianiTech en México con producción de baja escala en la cochera de un integrante, operación comercial automatizada con Odoo y captación de prospectos mediante Meta. Los importes están expresados en pesos mexicanos, incluyen una reserva prudencial y deben sustituirse por cotizaciones antes de comprometer recursos.
 
-== Presupuesto preliminar para el lote piloto
+Se propone utilizar *Odoo Personalizado* para tres usuarios internos, porque incluye las aplicaciones y permite API externa para automatizar prospectos, pedidos o tickets. Su precio puede llegar a \$510 MXN por usuario al mes más IVA; por ello se presupuestan \$10,650 para seis meses. Odoo Estándar puede reducir el costo aproximadamente a \$6,000 sin integraciones externas @odoo_pricing_2026.
 
-La #link(<tabla-presupuesto>)[Tabla 1] presenta una estimación inicial de los recursos necesarios para producir y validar el lote piloto de PianiTech. Los montos cuantificados corresponden a los costos disponibles al momento del análisis, mientras que los rubros pendientes requieren cotizaciones, mediciones o una definición más precisa del alcance.
+Meta permite definir la inversión y los límites de gasto de cada campaña. Se asignan \$5,000 mensuales durante seis meses, sujetos a revisión semanal según el costo por prospecto y la conversión @meta_ads_costs_2026.
+
+== Supuestos de planeación
+
+- Producción inicial de *30 unidades comerciales*, además de 10 equipos de demostración y piloto.
+- Costo objetivo preliminar de materiales por unidad: *\$1,500 MXN*. Debe validarse mediante una BOM con proveedor, modelo, envío, impuestos, desperdicio y refacciones.
+- La cochera no genera renta en efectivo durante los primeros seis meses, pero sí costos de adaptación, electricidad, internet, seguridad y mantenimiento.
+- Deben verificarse el uso de suelo, el reglamento local, el seguro del inmueble y la compatibilidad de la actividad con el contrato eléctrico.
+- Para baja tensión y demanda de hasta 25 kW, CFE publica la categoría PDBT; la tarifa y el depósito dependen de la región y la instalación @cfe_pdbt_2026.
+- El presupuesto *lean* difiere temporalmente la remuneración de los fundadores. También se presenta un escenario sostenible con dos puestos de tiempo completo.
+- El salario mínimo general de 2026 es de \$315.04 MXN diarios fuera de la Zona Libre de la Frontera Norte @conasami_salarios_2026.
+- Una Sociedad por Acciones Simplificada puede constituirse en línea y sin costo si cumple sus requisitos; se conserva una reserva para asesoría, permisos y trámites @gobmex_sas.
+
+== Inversión inicial
+
+La #link(<tabla-inversion>)[Tabla 1] desglosa la inversión necesaria para preparar el espacio, adquirir herramientas y disponer del primer inventario.
 
 #block[
-	#set text(size: 7.5pt)
-	#set table(inset: 1.5mm)
-	#table(
-		columns: (1.15fr, 2.3fr, 1fr, 2.55fr),
-		align: (left, left, right, left),
-		fill: (x, y) => if y == 0 {
-			navy
-		} else if y == 14 {
-			pale-blue
-		} else if calc.odd(y) {
-			paper
-		} else {
-			none
-		},
-		table.header(
-			text(fill: white, weight: "bold")[Rubro],
-			text(fill: white, weight: "bold")[Base de estimación y alcance],
-			text(fill: white, weight: "bold")[Monto estimado (MXN)],
-			text(fill: white, weight: "bold")[Evidencia o información pendiente],
-		),
-		[Producción y escalamiento],
-		[Estimación existente para 10 placas PCB, componentes al mayoreo y filamento PLA para gabinetes 3D],
-		[\$3,500],
-		[Obtener la lista de materiales con fabricante, modelo, cantidad y precio; cargar los archivos Gerber, BOM y CPL para solicitar una cotización reproducible de PCB y ensamble. El fabricante consultado genera cotizaciones con esos archivos @jlcpcb_fabricacion_pcb.],
-		[Infraestructura digital],
-		[Broker MQTT, almacenamiento de telemetría, respaldo, conectividad y equipo de cómputo],
-		[Pendiente],
-		[Definir mensajes por minuto, retención histórica, disponibilidad, número de dispositivos y si el despliegue será local o en la nube; después, cotizar el escenario elegido.],
-		[Desarrollo y pruebas],
-		[Integración electrónica, cliente Python, calibración, pruebas funcionales, pruebas de comunicación y ejecución del piloto],
-		[Pendiente],
-		[Registrar las horas de trabajo por actividad, los materiales consumibles, el uso de laboratorio y el costo de repetir las pruebas.],
-		[Propiedad intelectual],
-		[Registro de obra o programa de computación ante INDAUTOR],
-		[\$367],
-		[La tarifa oficial de 2026 para el registro de una obra es de \$367 MXN @indautor_tarifas_2026. Falta determinar si también se protegerán el nombre comercial, la marca, el diseño o alguna invención mediante trámites diferentes.],
-		[Certificaciones y cumplimiento],
-		[Autoevaluación, evaluación de riesgos e informes internos durante la validación escolar],
-		[\$0 en la fase interna],
-		[Identificar las normas aplicables cuando se definan los sensores, la alimentación, el gabinete, las comunicaciones y la instalación; solicitar una cotización a un laboratorio acreditado si se requiere una certificación externa. La validación interna no equivale a una certificación.],
-		[Empaquetado],
-		[Estimación existente para cajas Kraft, etiquetas y código QR hacia el manual digital del lote piloto],
-		[\$500],
-		[Obtener una cotización que considere las medidas del gabinete, la cantidad, la impresión, los impuestos y la entrega.],
-		[Promoción],
-		[Estimación existente para materiales de demostración y difusión inicial],
-		[\$300],
-		[Precisar los impresos, traslados, demostraciones y dominio. GitHub ofrece un plan gratuito con Pages para documentación o un sitio sencillo, por lo que la plataforma puede comenzar sin una cuota de hospedaje dentro de sus límites @github_pricing_2026.],
-		[Distribución],
-		[Estimación existente para entregas locales o primeros envíos],
-		[\$600],
-		[Medir el peso y las dimensiones del paquete, además de definir origen, destino, seguro y volumen. El costo debe comprobarse mediante el tarificador oficial de MEXPOST o cotizaciones equivalentes @mexpost_tarificador.],
-		[Instalación],
-		[Diagnóstico del sitio, traslado, montaje, configuración, pruebas de recepción y puesta en operación],
-		[Pendiente],
-		[Definir la distancia, duración, personal, materiales de fijación, alimentación y condiciones de cada activo.],
-		[Capacitación],
-		[Manual en PDF, videotutoriales y sesión inicial elaborados por el equipo],
-		[\$0 de desembolso inicial],
-		[Estimar las horas de preparación, la duración por cliente, la actualización de los materiales y la modalidad presencial o remota.],
-		[Licenciamiento],
-		[Uso previsto de componentes de código abierto],
-		[\$0 de desembolso inicial],
-		[Elegir la licencia del software propio, revisar su compatibilidad con las dependencias y definir qué se transfiere al cliente: uso, código, documentación, datos o servicio.],
-		[Soporte técnico],
-		[Atención inicial mediante correo y mensajería administrada por el equipo],
-		[\$0 de desembolso inicial],
-		[Definir la garantía, horario, canal, tiempo de respuesta, mantenimiento, reposición y horas mensuales; estas horas deberán convertirse en un costo operativo.],
-		[Contingencia],
-		[Reposición de componentes, variaciones de precio y repetición de pruebas],
-		[Pendiente],
-		[Definir el monto después de recibir las cotizaciones y evaluar los riesgos del piloto.],
-		text(weight: "bold")[Subtotal preliminar cuantificado],
-		text(weight: "bold")[Producción, propiedad intelectual, empaquetado, promoción y distribución],
-		text(weight: "bold")[\$5,267],
-		text(weight: "bold")[No incluye infraestructura, desarrollo, certificación externa, instalación, horas de capacitación, soporte ni contingencia.],
+  #set text(size: 7.8pt)
+  #set table(inset: 1.5mm)
+  #table(
+    columns: (1.35fr, 2.7fr, 1fr),
+    align: (left, left, right),
+    fill: (x, y) => if y == 0 { navy } else if y == 8 { pale-blue } else if calc.odd(y) { paper } else { none },
+    table.header(
+      text(fill: white, weight: "bold")[Rubro],
+      text(fill: white, weight: "bold")[Base de cálculo],
+      text(fill: white, weight: "bold")[Monto (MXN)],
+    ),
+    [Constitución, alta fiscal y apertura administrativa], [Reserva para asesoría, e.firma, contratos, cuenta bancaria y revisión del esquema SAS], [\$10,000],
+    [Propiedad intelectual], [Reserva para búsqueda y solicitud de marca, registro de software o documentación], [\$4,500],
+    [Adaptación de la cochera], [Iluminación, ventilación, mesa, anaqueles, extintor, señalización y separación del inventario], [\$18,000],
+    [Herramientas y control de calidad], [Estación de soldadura, extracción, protección ESD, multímetros, fuentes, crimpado, consumibles y patrones básicos de prueba], [\$28,000],
+    [Equipos de demostración y piloto], [10 unidades × \$1,500], [\$15,000],
+    [Inventario comercial inicial], [30 unidades × \$1,500], [\$45,000],
+    [Empaque y etiquetado], [30 unidades × \$150], [\$4,500],
+    text(weight: "bold")[Subtotal de inversión inicial], [], text(weight: "bold")[\$125,000],
   )
-	#label("tabla-presupuesto")
+  #label("tabla-inversion")
 ]
 
 #v(2mm)
-#align(center)[
-	#text(size: 8.5pt, fill: muted)[
-		Tabla 1. Presupuesto preliminar cuantificado para el lote piloto.
-	]
+#align(center)[#text(size: 8.5pt, fill: muted)[Tabla 1. Inversión inicial del escenario de arranque.]]
+
+== Costos de operación durante seis meses
+
+La #link(<tabla-operacion>)[Tabla 2] presenta los costos recurrentes estimados para operar durante los primeros seis meses.
+
+#block[
+  #set text(size: 7.8pt)
+  #set table(inset: 1.5mm)
+  #table(
+    columns: (1.35fr, 2.7fr, 1fr),
+    align: (left, left, right),
+    fill: (x, y) => if y == 0 { navy } else if y == 11 { pale-blue } else if calc.odd(y) { paper } else { none },
+    table.header(
+      text(fill: white, weight: "bold")[Rubro],
+      text(fill: white, weight: "bold")[Base de cálculo],
+      text(fill: white, weight: "bold")[Monto para 6 meses (MXN)],
+    ),
+    [Odoo Personalizado], [3 usuarios × hasta \$510 × 6 meses × IVA, redondeado], [\$10,650],
+    [Configuración de automatizaciones], [CRM, embudo, cotizaciones, inventario, facturación, posventa, garantías, tickets y tableros], [\$12,000],
+    [Publicidad en Meta], [\$5,000 mensuales para campañas de generación de prospectos y remarketing], [\$30,000],
+    [Infraestructura digital], [Dominio, correo, broker MQTT, servidor, base de datos, copias de seguridad y monitoreo], [\$9,000],
+    [Electricidad e internet incremental], [\$2,000 mensuales para producción, pruebas y conectividad], [\$12,000],
+    [Contabilidad y cumplimiento fiscal], [\$2,500 mensuales], [\$15,000],
+    [Traslados, demostraciones e instalaciones], [\$5,000 mensuales], [\$30,000],
+    [Consumibles y mantenimiento], [Soldadura, conectores, tornillería, filamento, adhesivos, limpieza y reposición de herramientas], [\$9,000],
+    [Atención al cliente], [Telefonía, mensajería y número empresarial], [\$3,000],
+    [Reserva de garantía], [5% del inventario comercial inicial], [\$2,250],
+    [Seguridad, permisos y seguro], [Reserva para protección del espacio y responsabilidad civil], [\$8,000],
+    text(weight: "bold")[Subtotal operativo], [], text(weight: "bold")[\$140,900],
+  )
+  #label("tabla-operacion")
 ]
+
+#v(2mm)
+#align(center)[#text(size: 8.5pt, fill: muted)[Tabla 2. Costos de operación durante seis meses.]]
+
+== Capital requerido
+
+La #link(<tabla-capital>)[Tabla 3] compara el capital requerido en un escenario lean y en un escenario sostenible con mano de obra presupuestada.
+
+#block[
+  #set text(size: 7.8pt)
+  #set table(inset: 1.5mm)
+  #table(
+    columns: (1.4fr, 2.6fr, 1fr),
+    align: (left, left, right),
+    fill: (x, y) => if y == 0 { navy } else if y == 3 or y == 5 { pale-blue } else if calc.odd(y) { paper } else { none },
+    table.header(
+      text(fill: white, weight: "bold")[Escenario],
+      text(fill: white, weight: "bold")[Cálculo],
+      text(fill: white, weight: "bold")[Total (MXN)],
+    ),
+    [Base antes de contingencia], [Inversión inicial + operación de seis meses], [\$265,900],
+    [Contingencia], [10% para inflación, importaciones, componentes defectuosos y repetición de pruebas], [\$26,590],
+    text(weight: "bold")[Arranque lean en efectivo], [Trabajo de los fundadores temporalmente diferido], text(weight: "bold")[\$292,490],
+    [Mano de obra para escenario sostenible], [Dos puestos × salario mínimo general × 30.4 días × 6 meses, más provisión patronal de 30%], [\$149,405],
+    text(weight: "bold")[Arranque sostenible recomendado], [Arranque lean + mano de obra], text(weight: "bold")[\$441,895],
+  )
+  #label("tabla-capital")
+]
+
+#v(2mm)
+#align(center)[#text(size: 8.5pt, fill: muted)[Tabla 3. Capital requerido según el escenario de operación.]]
+
+*Advertencia:* el escenario *lean* no significa que el trabajo de los integrantes sea gratuito. Únicamente difiere su pago y debe registrarse como aportación de los socios. Si existe una relación laboral, la empresa deberá presupuestar salarios, seguridad social y prestaciones conforme a su ubicación y situación jurídica. La provisión patronal de 30% es un supuesto de planeación y no una tasa legal única.
+
+== Automatización comercial y de posventa
+
+El flujo recomendado es: *Anuncio o formulario de Meta → prospecto en Odoo CRM → calificación automática → cotización y seguimiento → pedido e inventario → instalación → factura → capacitación → ticket de soporte y garantía → encuesta de satisfacción.*
+
+Odoo centralizaría ventas, inventario, contabilidad, proyectos y atención al cliente. Meta se utilizaría para captar prospectos y realizar remarketing. Los accesos deberán asignarse por función y las automatizaciones conservarán el consentimiento, la trazabilidad y únicamente los datos necesarios del cliente.
+
+Durante el primer mes se configurarán:
+
+- Catálogo de productos y servicios.
+- Costos y listas de precios.
+- Etapas del CRM y formularios de captación.
+- Plantillas de correo y mensajería.
+- Cotizaciones, recordatorios y políticas de garantía.
+- Flujo de tickets de soporte y tableros de ventas y atención.
+
+En los meses 2 y 3 se ejecutarán pruebas piloto, se medirá el costo real por unidad y se corregirá la BOM. En los meses 4 a 6 se liberará la producción comercial mediante lotes pequeños, únicamente cuando exista demanda confirmada o se alcance el nivel mínimo de inventario, para evitar inmovilizar efectivo.
+
+== Control financiero y criterios de decisión
+
+- Separar los gastos personales y empresariales desde el primer día.
+- Registrar las horas de ensamble, pruebas, instalación y soporte, aunque los socios difieran su pago.
+- Liberar la pauta de Meta por bloques semanales y detener anuncios que no generen prospectos calificados.
+- Medir costo por prospecto, conversión a demostración, conversión a venta, margen bruto, devoluciones, tiempo de instalación y tickets por equipo.
+- Mantener un fondo de garantía separado e inventario mínimo de refacciones críticas.
+- Solicitar cotizaciones comparables para fabricar 10, 30 y 100 unidades.
+- Dividir la compra de las primeras 30 unidades en dos lotes si la BOM o la demanda todavía no han sido validadas.
+- No fijar el precio comercial únicamente con base en el costo de los componentes.
+
+El costo directo unitario debe incluir:
+
+1. Lista de materiales.
+2. Envíos e impuestos.
+3. Empaque.
+4. Merma.
+5. Ensamble.
+6. Pruebas.
+7. Comisiones.
+8. Instalación.
+9. Capacitación.
+10. Garantía.
+11. Soporte inicial.
+
+El precio mínimo puede calcularse mediante la fórmula `Precio = costo directo / (1 − margen bruto objetivo)`.
