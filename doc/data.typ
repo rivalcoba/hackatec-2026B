@@ -14,27 +14,27 @@
     (
       name: "Martinez Sanchez Angel Armando",
       program: "ITICS",
-      email: "alumno1@institucional.mx",
+      email: "L221130268@institucional.mx",
     ),
     (
       name: "Mendoza Rodriguez Heber Otoniel",
       program: "ITICS",
-      email: "alumno2@institucional.mx",
+      email: "L221130271@institucional.mx",
     ),
     (
       name: "Romero Angeles Ivonne Alejandra",
       program: "ILOG",
-      email: "alumno3@institucional.mx",
+      email: "L241130110@institucional.mx",
     ),
     (
       name: "Parra Perez Ruben",
       program: "ITICS",
-      email: "alumno4@institucional.mx",
+      email: "LB15253581@institucional.mx",
     ),
     (
       name: "Urbina Cruz Roberto Alexis",
       program: "ITICS",
-      email: "alumno5@institucional.mx",
+      email: "L221130301@institucional.mx",
     ),
   ),
   student: "Halcones",
