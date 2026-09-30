@@ -2,9 +2,16 @@
 
 = Resumen
 
-Redacte entre 150 y 250 palabras. Presente de forma compacta el contexto, el objetivo, el método, los resultados principales y la conclusión más relevante. El resumen debe poder comprenderse sin consultar el resto del documento.
+*PianiTech* es un kit de retrofitting para instalar sistemas de vigilancia remota en talleres y PYMES con infraestructura brownfield. Integra sensores, comunicación MQTT y un cliente desarrollado en Python para supervisar máquinas rotatorias, presencia de gas o fuego y niveles de líquidos. Además, organiza los datos en ventanas de operación para detectar comportamientos anómalos mediante Isolation Forest.
+
+#figure(
+  image("../assets/Piantech-Logo.png",width: 60mm),
+  caption: [Logo de PianiTech]
+)<logo-pianitech>
+
+\
 
 #note-box(
   [Palabras clave],
-  [Incluya de tres a cinco términos específicos, separados por punto y coma.],
+  [Retrofitting, PYMES brownfield, vigilancia remota, telemetría, MQTT, Internet de las cosas, adquisición de datos, detección de anomalías, Isolation Forest y Python.],
 )

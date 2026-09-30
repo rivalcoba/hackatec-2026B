@@ -1,6 +1,6 @@
 = Definición del problema u oportunidad de mejora
 
-Describa el contexto de la organización, comunidad o proceso donde se identifica el problema u oportunidad de mejora.
+Describa el contexto de la organización, comunidad o proceso donde se identifica el problema u oportunidad de mejora. Integre los antecedentes directamente relacionados con el problema y susténtelos con citas bibliográficas, por ejemplo, @He2017.
 
 == Situación actual
 
