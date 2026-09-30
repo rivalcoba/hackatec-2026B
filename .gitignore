@@ -141,4 +141,7 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+# Generated PDF documents inside doc
+doc/**/*.pdf
+
 # End of https://www.toptal.com/developers/gitignore/api/node

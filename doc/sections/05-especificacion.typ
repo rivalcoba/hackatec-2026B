@@ -22,7 +22,7 @@ El flujo general de interacción entre los usuarios, los dispositivos y el siste
 #figure(
 	image(
 		"../assets/caso-de-uso.png",
-		format: "jpg",
+		format: "png",
 		width: 65%,
 	),
 	caption: [Caso de uso general de PianiTech.],
