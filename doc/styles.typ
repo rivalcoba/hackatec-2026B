@@ -12,11 +12,7 @@
 
 #let document-style(data, body) = {
   set text(
-    font: (
-      "Montserrat",
-      "Inter",
-      "Noto Sans",
-    ),
+    font: "Noto Sans",
     size: 10.5pt,
     lang: "es",
     region: "MX",

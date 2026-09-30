@@ -38,7 +38,7 @@
       // Identidad institucional.
       align(center + horizon)[
         #image(
-          "assets/logos.png",
+          "assets/logo-innovatec.png",
           width: 174mm,
           height: 44.2mm,
           fit: "contain",
@@ -48,16 +48,16 @@
       // Separador geométrico que retoma el motivo tecnológico de la referencia.
       align(center + horizon)[
         #grid(
-          columns: (1fr, 8mm, 1fr),
+          columns: (1fr, 20mm, 1fr),
           column-gutter: 2mm,
           line(length: 100%, stroke: 0.7pt + gold),
           block(
-            width: 8mm,
+            width: 20mm,
             height: 6mm,
             fill: navy,
           )[
             #align(center + horizon)[
-              #text(size: 7pt, weight: "bold", fill: white)[IA]
+              #text(size: 7pt, weight: "bold", fill: white)[TecNM ITGAM]
             ]
           ],
           line(length: 100%, stroke: 0.7pt + gold),
