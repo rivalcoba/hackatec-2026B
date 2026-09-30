@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-import { matchRoutes } from './routes/matches.js';
-import { setupSSE, addSSEClient } from './sse.js';
+import { deviceRoutes } from './routes/devices.js';
+import { setupSSE, addSSEClient, broadcastEvent } from './sse.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,7 +25,7 @@ function connectMQTT() {
   
   mqttClient = mqtt.connect(MQTT_BROKER, {
     // Generate a unique client ID for this MQTT connection
-    clientId: `football-scores-${uuidv4().slice(0, 8)}`,
+    clientId: `security-monitor-${uuidv4().slice(0, 8)}`,
     reconnectPeriod: 3000,
     connectTimeout: 10000,
   });
@@ -33,8 +33,7 @@ function connectMQTT() {
   // Handle MQTT connection establishment
   mqttClient.on('connect', () => {
     console.log('Connected to MQTT broker at', MQTT_BROKER);
-    // Subscribe to football-related topics once connected
-    mqttClient.subscribe('sports/football/#', { qos: 1 }, (err) => {
+    mqttClient.subscribe('security/#', { qos: 1 }, (err) => {
       if (err) console.error('Subscribe error:', err);
     });
   });
@@ -58,19 +57,19 @@ function connectMQTT() {
 
 const mqttClientInstance = connectMQTT();
 
-const { publishMatch, publishScoreUpdate, publishEvent, getMatches } 
-= matchRoutes(mqttClientInstance);
+const { getState, getDevices, updateDevice, handleMqttMessage } = deviceRoutes(
+  mqttClientInstance,
+  broadcastEvent,
+);
 
-setupSSE(mqttClientInstance);
+setupSSE(mqttClientInstance, handleMqttMessage);
 
-app.get('/api/events', (req, res) => addSSEClient(res));
-app.post('/api/matches', publishMatch);
-app.patch('/api/matches/:id/score', publishScoreUpdate);
-app.post('/api/matches/:id/events', publishEvent);
-app.get('/api/matches', getMatches);
+app.get('/api/events', (req, res) => addSSEClient(res, getState));
+app.get('/api/devices', getDevices);
+app.patch('/api/devices/:id', updateDevice);
 
 app.listen(PORT, () => {
-  console.log(`Football Scores Server running at http://localhost:${PORT}`);
-  console.log(`Admin (upload):  http://localhost:${PORT}/admin.html`);
+  console.log(`Security Monitor running at http://localhost:${PORT}`);
+  console.log(`Admin:           http://localhost:${PORT}/admin.html`);
   console.log(`Viewer:          http://localhost:${PORT}/viewer.html`);
 });
