@@ -23,12 +23,16 @@
 )
 #pagebreak()
 
-// Estructura IMRAD.
-#include "sections/01-introduccion.typ"
-#include "sections/02-metodos.typ"
-#include "sections/03-resultados.typ"
-#include "sections/04-discusion.typ"
-#include "sections/05-conclusiones.typ"
+// Estructura de la propuesta.
+#include "sections/01-problema.typ"
+#include "sections/02-propuesta.typ"
+#include "sections/03-metodologia.typ"
+#include "sections/04-herramientas.typ"
+#include "sections/05-especificacion.typ"
+#include "sections/06-ejes.typ"
+#include "sections/07-modelo-negocio.typ"
+#include "sections/08-validacion.typ"
+#include "sections/09-costos.typ"
 
 // Bibliografía.
 #pagebreak()
@@ -37,6 +41,3 @@
   title: [Referencias],
   style: "ieee",
 )
-
-// Material complementario.
-#include "sections/06-anexos.typ"
