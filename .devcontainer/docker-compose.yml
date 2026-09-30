@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
+    environment:
+      MQTT_BROKER: mqtt://mosquitto:1883
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
