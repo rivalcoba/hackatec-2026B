@@ -252,7 +252,7 @@
     }
 
     function populateSelects(matches) {
-      const opts = matches.map(m => `<option value="\({m.id}">\){m.homeTeam} vs ${m.awayTeam}</option>`).join('');
+      const opts = matches.map(m => `<option value="${m.id}">${m.homeTeam} vs ${m.awayTeam}</option>`).join('');
       const html = '<option value="">-- Select match --</option>' + opts;
       document.getElementById('scoreMatchId').innerHTML = html;
       document.getElementById('eventMatchId').innerHTML = html;
@@ -267,12 +267,12 @@
       list.innerHTML = matches.map(m => `
         <div class="match-card" data-id="${m.id}">
           <div class="match-info">
-            <div class="match-teams">\({m.homeTeam} vs \){m.awayTeam}</div>
-            <div class="match-meta">\({m.league} • \){m.status} • ${m.minute}'</div>
+            <div class="match-teams">${m.homeTeam} vs ${m.awayTeam}</div>
+            <div class="match-meta">${m.league} • ${m.status} • ${m.minute}'</div>
           </div>
-          <div class="match-score">\({m.homeScore} - \){m.awayScore}</div>
+          <div class="match-score">${m.homeScore} - ${m.awayScore}</div>
           <div class="match-actions">
-            <button class="btn-secondary" onclick="quickScore('\({m.id}', \){m.homeScore}, ${m.awayScore})">Update</button>
+            <button class="btn-secondary" onclick="quickScore('${m.id}', ${m.homeScore}, ${m.awayScore})">Update</button>
           </div>
         </div>
       `).join('');
@@ -328,7 +328,7 @@
         status: document.getElementById('status').value,
       };
       try {
-        const res = await fetch(`\({API}/matches/\){id}/score`, {
+        const res = await fetch(`${API}/matches/${id}/score`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -354,7 +354,7 @@
         description: document.getElementById('eventDesc').value.trim() || undefined,
       };
       try {
-        const res = await fetch(`\({API}/matches/\){id}/events`, {
+        const res = await fetch(`${API}/matches/${id}/events`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
