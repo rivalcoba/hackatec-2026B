@@ -27,6 +27,17 @@
   #text(size: 8pt, fill: muted)[ · #student.program · #student.email]
 ]
 
+#let cover-group(label, body) = [
+  #text(
+    size: 8pt,
+    weight: "bold",
+    tracking: 1.15pt,
+    fill: burgundy,
+  )[#upper(label)]
+  #v(0.5mm)
+  #body
+]
+
 #let cover(data) = page(
   paper: "a4",
   margin: 0pt,
@@ -37,7 +48,7 @@
   #pad(left: 18mm, right: 18mm, top: 12mm, bottom: 12mm)[
     #grid(
       columns: (1fr,),
-      rows: (45mm, 7mm, 56mm, 32mm, 80mm, 42mm, 7mm),
+      rows: (45mm, 7mm, 1fr, 6mm),
       row-gutter: 0pt,
 
       // Identidad institucional.
@@ -71,71 +82,64 @@
 
       // Título y subtítulo.
       align(center + horizon)[
-        #pad(left: 12mm, right: 12mm)[
-          #text(
-            size: 7.8pt,
-            weight: "bold",
-            tracking: 1.2pt,
-            fill: burgundy,
-          )[#upper(data.document-type)]
-
-          #v(2mm)
-
-          #text(
-            size: 8.5pt,
-            weight: "medium",
-            fill: muted,
-          )[#data.course · #data.course-code]
-
-          #v(3mm)
-
-          #par(leading: 0.98em, justify: false)[
-            #text(
-              size: 23pt,
-              weight: "bold",
-              fill: navy,
-              hyphenate: false,
-            )[#data.title]
-          ]
-
-          #v(2.5mm)
-
-          #par(leading: 1.15em, justify: false)[
-            #text(
-              size: 10.5pt,
-              fill: muted,
-            )[#data.subtitle]
-          ]
-        ]
-      ],
-
-      // Reto y temática.
-      align(center + horizon)[
-        #cover-entry("RETO", data.reto)
-        #v(2mm)
-        #cover-entry("TEMÁTICA", data.tematica)
-      ],
-
-      // Lista de alumnos.
-      align(center + horizon)[
-        #cover-entry("PRESENTA", [
-          #for student in data.students {
-            student-entry(student)
-            line(length: 100%, stroke: 0.35pt + line-gray)
-          }
-        ])
-      ],
-
-      // Asesor y fecha de entrega.
-      align(center + horizon)[
-        #cover-entry("ASESOR", data.professor)
-        #v(2mm)
-        #cover-entry(
-          "FECHA DE ENTREGA",
-          data.date,
-          secondary: [#data.city · #data.period],
-        )
-      ],
+      #grid(
+        columns: (1fr,),
+        row-gutter: 14mm,
+        align(center + horizon)[
+          #cover-group("MEMORIA TÉCNICA", [
+            #text(size: 8.5pt, weight: "medium", fill: muted)[
+              #data.course · #data.course-code
+            ]
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("TÍTULO Y SUBTÍTULO", [
+            #par(leading: 0.98em, justify: false)[
+              #text(
+                size: 23pt,
+                weight: "bold",
+                fill: navy,
+                hyphenate: false,
+              )[#data.title]
+            ]
+            #v(2mm)
+            #par(leading: 1.15em, justify: false)[
+              #text(size: 10.5pt, fill: muted)[#data.subtitle]
+            ]
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("RETO", [
+            #text(size: 14pt, weight: "semibold", fill: navy)[#data.reto]
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("TEMÁTICA", [
+            #text(size: 14pt, weight: "semibold", fill: navy)[#data.tematica]
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("PRESENTA", [
+            #for student in data.students {
+              student-entry(student)
+              line(length: 100%, stroke: 0.35pt + line-gray)
+            }
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("ASESOR", [
+            #text(size: 14pt, weight: "semibold", fill: navy)[#data.professor]
+          ])
+        ],
+        align(center + horizon)[
+          #cover-group("FECHA DE ENTREGA", [
+            #text(size: 14pt, weight: "semibold", fill: navy)[#data.date]
+            #v(0.4mm)
+            #text(size: 9.5pt, fill: muted)[#data.city · #data.period]
+          ])
+        ],
+      )
+    ],
 
       // Remate inferior sobrio.
       align(center + horizon)[

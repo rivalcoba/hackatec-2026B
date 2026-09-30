@@ -1,11 +1,12 @@
 #let report = (
   institution: "Tecnológico Nacional de México",
-  unit: "TecNM Virtual",
-  program: "Maestría en Inteligencia Artificial",
-  document-type: "Reporte académico",
+  //unit: "Hackatec",
+  program: "InnovatecNM",
+  document-type: "Memoria Técnica",
 
-  title: "Título preciso y representativo del trabajo",
-  subtitle: "Descripción breve del problema, método o alcance del reporte",
+  title: "PIANITECH",
+  subtitle: "Telemetría y Seguridad Industrial Adaptativa",
+
   reto: "Reto 2 Tecnologías Emergentes",
   tematica: "Telemetría, Teleprocesos y Sistemas de Adquisición de Datos",
 
@@ -36,14 +37,15 @@
       email: "alumno5@institucional.mx",
     ),
   ),
-  student: "Equipo de trabajo",
+  student: "Halcones",
 
-  course: "Nombre de la asignatura",
-  course-code: "CLAVE-000",
-  activity: "Actividad o número de tarea",
+  course: "Hackatec",
+  course-code: "2026",
+  activity: "Reto 2: Tecnologías Emergentes",
 
   professor: "Ivan Rivalcoba",
-  city: "Ciudad, entidad",
-  date: "Mes de 2026",
-  period: "Periodo académico",
+  
+  date: "Septiembre de 2026",
+  city: "CDMX",
+  period: "GAM",
 )
