@@ -18,6 +18,17 @@
     <a-entity light="type: point; color: #4cbca9; intensity: 1.2; distance: 12" position="3 3 -3"></a-entity>
     <a-plane rotation="-90 0 0" width="200" height="200" color="#162321" material="roughness: 0.95"></a-plane>
     <a-entity id="sensorStations"></a-entity>
+    <a-entity id="alarmSiren" position="0 0 0" visible="false">
+      <a-cylinder position="0 0.12 0" radius="0.38" height="0.24" color="#e7b84d" material="metalness: 0.55; roughness: 0.3"></a-cylinder>
+      <a-cylinder position="0 0.66 0" radius="0.09" height="0.9" color="#aab8b1" material="metalness: 0.7; roughness: 0.28"></a-cylinder>
+      <a-sphere position="0 1.25 0" radius="0.3" scale="1 0.76 1" color="#ff352f" material="emissive: #ff201b; emissiveIntensity: 1.6; roughness: 0.2" animation__pulse="property: scale; from: 1 0.76 1; to: 1.16 0.88 1.16; dir: alternate; dur: 420; loop: true; easing: easeInOutSine"></a-sphere>
+      <a-entity position="0 1.35 0" animation__spin="property: rotation; to: 0 360 0; dur: 900; easing: linear; loop: true">
+        <a-box position="0 0.04 0" width="0.86" height="0.055" depth="0.09" color="#ff5145" material="emissive: #ff201b; emissiveIntensity: 1.8"></a-box>
+      </a-entity>
+      <a-torus position="0 1.25 0" rotation="90 0 0" radius="0.48" radius-tubular="0.025" color="#ff7065" material="emissive: #ff352f; emissiveIntensity: 1.1" animation__ring="property: scale; from: 0.85 0.85 0.85; to: 1.16 1.16 1.16; dir: alternate; dur: 700; loop: true; easing: easeInOutSine"></a-torus>
+      <a-text position="0 1.86 0" value="ALARMA ACTIVA" align="center" anchor="center" width="3" color="#ff7065" font="mozillavr"></a-text>
+      <a-entity position="0 1.25 0" light="type: point; color: #ff352f; intensity: 2.4; distance: 7; decay: 2"></a-entity>
+    </a-entity>
     <a-entity id="cameraRig" position="0 1.65 6.2">
       <a-camera look-controls="magicWindowTrackingEnabled: true" wasd-controls="enabled: false"></a-camera>
     </a-entity>

@@ -37,11 +37,14 @@ function addSensorModel(root, type) {
     addShape(root, 'a-box', { position: '-0.24 0.65 0', rotation: '0 0 -18', width: '0.13', height: '0.52', depth: '0.14', color: COLORS.presence });
     addShape(root, 'a-box', { position: '0.24 0.65 0', rotation: '0 0 18', width: '0.13', height: '0.52', depth: '0.14', color: COLORS.presence });
   } else {
-    addShape(root, 'a-cylinder', { position: '0 0.7 0', radius: '0.32', height: '0.56', color: COLORS.motor, rotation: '90 0 0', material: 'roughness: 0.35; metalness: 0.35' });
+    const motorHousing = addShape(root, 'a-cylinder', { position: '0 0.7 0', radius: '0.32', height: '0.56', color: COLORS.motor, rotation: '90 0 0', material: 'roughness: 0.35; metalness: 0.35' });
     addShape(root, 'a-cylinder', { position: '0 0.7 0.2', radius: '0.13', height: '0.09', color: '#d9dcff' });
+    const rotor = makeEntity('a-entity', { position: '0 0.7 0' });
     for (let index = 0; index < 4; index += 1) {
-      addShape(root, 'a-box', { position: '0 0.7 0', rotation: `0 0 ${index * 45}`, width: '0.65', height: '0.07', depth: '0.09', color: COLORS.motor });
+      addShape(rotor, 'a-box', { rotation: `0 0 ${index * 45}`, width: '0.65', height: '0.07', depth: '0.09', color: COLORS.motor });
     }
+    root.append(rotor);
+    return { motorRotor: rotor, motorHousing };
   }
 }
 
@@ -52,12 +55,12 @@ function createStation(device, index) {
   addShape(root, 'a-torus', { position: '0 0.17 0', rotation: '90 0 0', radius: '0.48', 'radius-tubular': '0.018', color: '#47736b' });
   const model = makeEntity('a-entity');
   root.append(model);
-  addSensorModel(model, device.type);
+  const motorParts = addSensorModel(model, device.type) || {};
   const beacon = addShape(root, 'a-sphere', { position: '0 1.48 0', radius: '0.09', color: COLORS.normal, material: `emissive: ${COLORS.normal}; emissiveIntensity: 0.8` });
   const name = addShape(root, 'a-text', { position: '0 1.83 0', align: 'center', anchor: 'center', width: '2.6', color: '#f1f3e9', 'wrap-count': '24', font: 'mozillavr' });
   name.setAttribute('text', 'value', device.name);
   const reading = addShape(root, 'a-text', { position: '0 0.38 0', align: 'center', anchor: 'center', width: '2.5', color: COLORS.normal, 'wrap-count': '28', font: 'mozillavr' });
-  const elements = { root, model, beacon, reading };
+  const elements = { root, model, beacon, reading, ...motorParts };
   stations.set(device.id, elements);
   stationRoot.append(root);
   updateStation(device, elements);
@@ -78,7 +81,20 @@ function updateStation(device, elements, devices = currentState?.devices || []) 
   elements.beacon.setAttribute('material', { color, emissive: color, emissiveIntensity: 0.8 });
   elements.reading.setAttribute('text', 'value', VALUE_LABELS[device.type]?.[String(device.value)] || 'ESTADO DESCONOCIDO');
   elements.reading.setAttribute('text', 'color', color);
-  elements.model.object3D.scale.setScalar(device.type === 'motor' && device.value === 'on' ? 1.04 : 1);
+  if (device.type === 'motor') {
+    const running = device.value === 'on';
+    elements.model.object3D.scale.setScalar(running ? 1.16 : 1);
+    if (running) {
+      elements.motorRotor.setAttribute('animation', { property: 'rotation', from: '0 0 0', to: '0 0 360', dur: 720, easing: 'linear', loop: true });
+    } else {
+      elements.motorRotor.removeAttribute('animation');
+      elements.motorRotor.object3D.rotation.set(0, 0, 0);
+    }
+    elements.motorHousing.setAttribute('material', 'color', running ? '#59e0ad' : COLORS.motor);
+    elements.motorRotor.querySelectorAll('a-box').forEach((blade) => {
+      blade.setAttribute('color', running ? '#59e0ad' : COLORS.motor);
+    });
+  }
 }
 
 function renderState(state) {
@@ -95,6 +111,7 @@ function renderState(state) {
   alarm.classList.toggle('normal', !active);
   alarm.classList.remove('unknown');
   document.getElementById('alarmText').textContent = active ? 'ALARMA ACTIVA' : 'SISTEMA NORMAL';
+  document.getElementById('alarmSiren').setAttribute('visible', active);
 }
 
 function setConnection(connected) {

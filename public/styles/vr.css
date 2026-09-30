@@ -24,7 +24,7 @@ h1 { margin:.1rem 0 0; font:700 2.3rem/.94 var(--display); text-transform:upperc
 .connection.disconnected .status-light { background:var(--red); }
 .alarm-state.normal { color:var(--green); }
 .alarm-state.normal span:first-child { background:var(--green); }
-.alarm-state.active { color:var(--red); }
+.alarm-state.active { color:var(--red); animation:alarm-flash 1s ease-in-out infinite; }
 .alarm-state.active span:first-child { background:var(--red); box-shadow:0 0 0 3px rgb(255 112 101 / 18%); }
 .alarm-state.unknown { color:var(--amber); }
 .alarm-state.unknown span:first-child { background:var(--amber); }
@@ -33,7 +33,8 @@ h1 { margin:.1rem 0 0; font:700 2.3rem/.94 var(--display); text-transform:upperc
 .vr-help p { flex:1; margin:0; color:#d2ddd5; font-size:.74rem; line-height:1.4; }
 .vr-help a { flex:none; color:var(--teal); font-size:.68rem; text-decoration:none; }
 .scene-error { position:absolute; top:50%; left:50%; width:min(380px,calc(100% - 2rem)); margin:0; padding:1rem; transform:translate(-50%,-50%); background:#301c1b; color:#ffe0dc; font-size:.9rem; text-align:center; }
+@keyframes alarm-flash { 50% { filter:brightness(1.8); text-shadow:0 0 10px rgb(255 112 101 / 65%); } }
 .a-enter-vr { right:max(1.2rem,env(safe-area-inset-right))!important; bottom:max(1.35rem,env(safe-area-inset-bottom))!important; z-index:3!important; }
 @media(max-width:600px) { .vr-topbar{min-height:56px;padding-inline:1rem} .vr-interface{inset:56px 0 0;padding:1rem} .vr-heading{align-items:flex-start} .vr-title,.vr-statuses{padding:.5rem .6rem} h1{font-size:1.9rem} .eyebrow{font-size:.54rem} .vr-statuses{min-width:158px} .connection,.alarm-state{font-size:.57rem} .vr-help{width:calc(100% - 4rem);min-height:58px;gap:.55rem;padding:.6rem} .help-mark{width:30px;height:30px} .vr-help p{font-size:.67rem} .vr-help a{font-size:.61rem;max-width:76px;line-height:1.3} }
 @media(max-width:380px) { .brand{gap:.45rem;font-size:.75rem} .vr-topbar nav a{min-width:40px;padding-inline:.45rem} .vr-heading{gap:.4rem} .vr-title,.vr-statuses{padding:.45rem} .vr-statuses{min-width:145px} .vr-help{width:calc(100% - 3.4rem)} .vr-help a{max-width:62px} }
-@media(prefers-reduced-motion:reduce) { *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important} }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important} }
