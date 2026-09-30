@@ -24,21 +24,27 @@ let mqttClient = null;
 function connectMQTT() {
   
   mqttClient = mqtt.connect(MQTT_BROKER, {
+    // Generate a unique client ID for this MQTT connection
     clientId: `football-scores-${uuidv4().slice(0, 8)}`,
     reconnectPeriod: 3000,
     connectTimeout: 10000,
   });
 
+  // Handle MQTT connection establishment
   mqttClient.on('connect', () => {
     console.log('Connected to MQTT broker at', MQTT_BROKER);
+    // Subscribe to football-related topics once connected
     mqttClient.subscribe('sports/football/#', { qos: 1 }, (err) => {
       if (err) console.error('Subscribe error:', err);
     });
   });
+
+  // Handle incoming MQTT errors
   mqttClient.on('error', (err) => {
     console.error('MQTT error:', err.message);
   });
 
+  // Handle MQTT connection close event
   mqttClient.on('close', () => {
     console.log('MQTT connection closed');
   });
@@ -51,7 +57,10 @@ function connectMQTT() {
 }
 
 const mqttClientInstance = connectMQTT();
-const { publishMatch, publishScoreUpdate, publishEvent, getMatches } = matchRoutes(mqttClientInstance);
+
+const { publishMatch, publishScoreUpdate, publishEvent, getMatches } 
+= matchRoutes(mqttClientInstance);
+
 setupSSE(mqttClientInstance);
 
 app.get('/api/events', (req, res) => addSSEClient(res));
